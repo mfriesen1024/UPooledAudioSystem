@@ -37,7 +37,7 @@ internal class PooledAudioSource:MonoBehaviour
         if (!initialized) return;
         ticksLeft--;
 
-        if (ticksLeft > 0) return;
+        if (ticksLeft > 0 || audioSource.isPlaying) return;
         if (shouldDestroyOnFinish) Destroy(gameObject);
         else gameObject.SetActive(false);
     }
