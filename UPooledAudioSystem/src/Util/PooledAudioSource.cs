@@ -14,6 +14,7 @@ internal class PooledAudioSource:MonoBehaviour
     
     internal AudioSource audioSource;
     internal AudioClip clip;
+    internal Action FinishedPlaying;
     internal bool shouldDestroyOnFinish;
 
     int ticksLeft;
@@ -38,6 +39,7 @@ internal class PooledAudioSource:MonoBehaviour
         ticksLeft--;
 
         if (ticksLeft > 0 || audioSource.isPlaying) return;
+        FinishedPlaying?.Invoke();
         if (shouldDestroyOnFinish) Destroy(gameObject);
         else gameObject.SetActive(false);
     }
