@@ -8,6 +8,8 @@ namespace ca.ScottishDwarfStudio.UPooledAudioSystem.Core;
 
 public sealed class SoundManager:MonoBehaviour
 {
+    public static SoundManager Instance => instance;
+    static SoundManager instance;
     internal PoolSystem PoolSystem => poolSystem;
     PoolSystem poolSystem;
     
@@ -23,6 +25,8 @@ public sealed class SoundManager:MonoBehaviour
 
     void Start()
     {
+        instance = this;
+        
         musicSource = (new GameObject("MusicSource").AddComponent(typeof(AudioSource)) as AudioSource)!;
         staticFxSource = (new GameObject("StaticFXSource").AddComponent(typeof(AudioSource)) as AudioSource)!;
         musicSource.transform.SetParent(transform);
