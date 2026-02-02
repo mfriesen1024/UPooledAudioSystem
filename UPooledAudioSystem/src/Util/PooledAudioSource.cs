@@ -2,32 +2,35 @@
 
 using ca.ScottishDwarfStudio.UPooledAudioSystem.Core;
 using UnityEngine;
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
 
 namespace ca.ScottishDwarfStudio.UPooledAudioSystem.Util;
 
 [RequireComponent(typeof(AudioSource))]
 internal class PooledAudioSource:MonoBehaviour
 {
+/*
     SoundManager soundManager => SoundManager.Instance;
+*/
     
     bool initialized;
-    
-    internal AudioSource audioSource;
-    internal AudioClip clip;
+
+    AudioSource audioSource;
+    internal AudioClip Clip;
     internal Action FinishedPlaying;
-    internal bool shouldDestroyOnFinish;
+    internal bool ShouldDestroyOnFinish;
 
     int ticksLeft;
 
     internal void Init()
     {
         audioSource = GetComponent<AudioSource>();
-        audioSource.clip = clip;
+        audioSource.clip = Clip;
         audioSource.Play();
 
-        if (shouldDestroyOnFinish)
+        if (ShouldDestroyOnFinish)
         {
-            ticksLeft = (int)clip.length * 50;
+            ticksLeft = (int)Clip.length * 50;
         }
         
         initialized = true;
@@ -40,7 +43,7 @@ internal class PooledAudioSource:MonoBehaviour
 
         if (ticksLeft > 0 || audioSource.isPlaying) return;
         FinishedPlaying?.Invoke();
-        if (shouldDestroyOnFinish) Destroy(gameObject);
+        if (ShouldDestroyOnFinish) Destroy(gameObject);
         else gameObject.SetActive(false);
     }
 }

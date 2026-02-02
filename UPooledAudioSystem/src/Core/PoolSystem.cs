@@ -37,7 +37,7 @@ internal class PoolSystem:MonoBehaviour
             if(!deleteUnusedOverflow)pool.Add(source);
         }
         
-        source.clip = clip;
+        source.Clip = clip;
         source.Init();
         inUseCount++;
     }
@@ -47,7 +47,9 @@ internal class PoolSystem:MonoBehaviour
         var pooledAudioSource = new GameObject().AddComponent<PooledAudioSource>();
         pooledAudioSource.transform.parent=transform;
         pooledAudioSource.FinishedPlaying += DecrementCounter;
-        pooledAudioSource.shouldDestroyOnFinish = true;
+        
+        // use >= here because we increment after creation.
+        pooledAudioSource.ShouldDestroyOnFinish = inUseCount >= targetPoolSize; 
         return pooledAudioSource;
     }
     
