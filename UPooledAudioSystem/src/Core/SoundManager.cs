@@ -11,6 +11,7 @@ public sealed class SoundManager:MonoBehaviour
 {
     public static SoundManager Instance => instance;
     static SoundManager instance;
+    public SoundList Sounds => sounds;
     internal PoolSystem PoolSystem => poolSystem;
     PoolSystem poolSystem;
     

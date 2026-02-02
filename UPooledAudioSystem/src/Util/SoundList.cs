@@ -8,8 +8,9 @@ using UnityEngine;
 namespace ca.ScottishDwarfStudio.UPooledAudioSystem.Util;
 
 [Serializable]
-internal class SoundList
+public sealed class SoundList
 {
+    // TODO: convert to readonly.
     [Header("Music")] object crlf;
     [SerializeField] public AudioClip menuMusic, gameplayMusic;
 
