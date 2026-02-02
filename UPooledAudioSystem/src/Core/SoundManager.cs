@@ -42,4 +42,24 @@ public sealed class SoundManager:MonoBehaviour
         poolSystem.transform.SetParent(transform);
         poolSystem.Init(poolSize, deleteUnusedOverflow);
     }
+
+    public void PlaySound(PoolableAudioClip clip)
+    {
+        switch (clip.tag)
+        {
+            case AudioTags.Tag.Default:
+                poolSystem.PlaySound(clip);
+                break;
+            case AudioTags.Tag.BGM:
+                musicSource.clip = clip;
+                musicSource.Play();
+                break;
+            case AudioTags.Tag.Static:
+                staticFxSource.clip = clip;
+                staticFxSource.Play();
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
+    }
 }

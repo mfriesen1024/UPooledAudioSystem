@@ -7,7 +7,7 @@ namespace ca.ScottishDwarfStudio.UPooledAudioSystem.Core;
 
 internal class PoolSystem:MonoBehaviour
 {
-    List<PooledAudioSource> pool;
+    readonly List<PooledAudioSource> pool = new();
     int targetPoolSize;
     int inUseCount;
     bool deleteUnusedOverflow;
@@ -23,7 +23,7 @@ internal class PoolSystem:MonoBehaviour
         }
     }
 
-    void PlaySound(AudioClip clip)
+    internal void PlaySound(PoolableAudioClip clip)
     {
         PooledAudioSource source;
         if (inUseCount < pool.Count)

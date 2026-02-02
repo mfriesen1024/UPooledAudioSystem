@@ -12,13 +12,13 @@ public sealed class SoundList
 {
     // TODO: convert to readonly.
     [Header("Music")] object crlf;
-    [SerializeField] public AudioClip menuMusic, gameplayMusic;
+    [SerializeField] public PoolableAudioClip menuMusic, gameplayMusic;
 
     [Header("Bla")] object crlf2;
-    [SerializeField] public AudioClip rockHit, rockBreak, playerHit, playerStun;
-    [SerializeField] public AudioClip chestOpen, chestClose, oreBanked;
+    [SerializeField] public PoolableAudioClip rockHit, rockBreak, playerHit, playerStun;
+    [SerializeField] public PoolableAudioClip chestOpen, chestClose, oreBanked;
     [Header("Bla2")] object crlf3;
-    [SerializeField] public AudioClip footstep1;
+    [SerializeField] public PoolableAudioClip footstep1;
     [Header("Bla3")] object crlf4;
-    [SerializeField] public AudioClip gameplayStart, gameplayEnd, results;
+    [SerializeField] public PoolableAudioClip gameplayStart, gameplayEnd, results;
 }
