@@ -2,7 +2,8 @@
 
 using ca.ScottishDwarfStudio.UPooledAudioSystem.Util;
 using UnityEngine;
-using UnityEngine.Serialization;
+
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
 
 namespace ca.ScottishDwarfStudio.UPooledAudioSystem.Core;
 
@@ -16,12 +17,16 @@ public sealed class SoundManager:MonoBehaviour
     AudioSource musicSource;
     AudioSource staticFxSource;
 
+#pragma warning disable CS0169 // Field is never used
     [Header("Performance")] object crlf;
+#pragma warning restore CS0169 // Field is never used
     [SerializeField] int poolSize = 10;
     [SerializeField] bool deleteUnusedOverflow=true; 
 
+#pragma warning disable CS0169 // Field is never used
     [Header("Sound Data")] object crlf2;
-    [SerializeField] SoundList sounds;
+#pragma warning restore CS0169 // Field is never used
+    [SerializeField] SoundList sounds = new();
 
     void Start()
     {
