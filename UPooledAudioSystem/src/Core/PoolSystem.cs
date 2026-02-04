@@ -29,6 +29,7 @@ internal class PoolSystem:MonoBehaviour
         if (inUseCount < pool.Count)
         {
             source = pool[inUseCount];
+            source.gameObject.SetActive(true);
         }
 
         else
