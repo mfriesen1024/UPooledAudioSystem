@@ -29,7 +29,7 @@ public sealed class SoundManager:MonoBehaviour
 #pragma warning restore CS0169 // Field is never used
     [SerializeField] SoundList sounds = new();
 
-    void Start()
+    void Awake()
     {
         instance = this;
         
