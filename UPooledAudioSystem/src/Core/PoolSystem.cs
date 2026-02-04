@@ -44,7 +44,7 @@ internal class PoolSystem:MonoBehaviour
 
     PooledAudioSource MakeNew()
     {
-        var pooledAudioSource = new GameObject().AddComponent<PooledAudioSource>();
+        var pooledAudioSource = new GameObject("PooledAudioSource").AddComponent<PooledAudioSource>();
         pooledAudioSource.transform.parent=transform;
         pooledAudioSource.FinishedPlaying += DecrementCounter;
         
