@@ -3,7 +3,7 @@
 #if CAN_LINK
 
 // Again, this should only compile if we can link to dwarf game.
-namespace ca.ScottishDwarfStudio.UPooledAudioSystem.Core;
+namespace ca.ScottishDwarfStudio.UPooledAudioSystem.Ext;
 
 internal class EventHelper
 {
