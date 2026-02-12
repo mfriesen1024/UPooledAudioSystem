@@ -8,7 +8,7 @@
         <RootNamespace>ca.ScottishDwarfStudio.UPooledAudioSystem</RootNamespace>
     </PropertyGroup>
 
-    <ItemGroup>
+    <ItemGroup>      
       <Reference Include="UnityEngine">
         <HintPath>..\..\..\Unity\Hub\Editor\6000.0.58f2\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
       </Reference>
@@ -19,5 +19,14 @@
         <HintPath>..\..\..\Unity\Hub\Editor\6000.0.58f2\Editor\Data\Managed\UnityEngine\UnityEngine.CoreModule.dll</HintPath>
       </Reference>
     </ItemGroup>
-
+    
+    <!-- Make sure unity project actually exists. -->
+    <ItemGroup Condition="Exists('..\..\..\Documents\GitHub\DwarfGame\Library\ScriptAssemblies\Assembly-CSharp.dll')">
+        <Reference Include="Assembly-CSharp">
+            <HintPath>..\..\..\Documents\GitHub\DwarfGame\Library\ScriptAssemblies\Assembly-CSharp.dll</HintPath>
+        </Reference>
+    </ItemGroup>
+    <PropertyGroup Condition="Exists('..\..\..\Documents\GitHub\DwarfGame\Library\ScriptAssemblies\Assembly-CSharp.dll')">
+        <DefineConstants>$(DefineConstants);CAN_LINK</DefineConstants>
+    </PropertyGroup>
 </Project>

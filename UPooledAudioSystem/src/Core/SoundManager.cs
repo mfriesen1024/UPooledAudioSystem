@@ -1,5 +1,6 @@
 // Copyright © 2026 ScottishDwarfStudios under licence from mFriesen1024 (mfriesen1024@gmail.com)
 
+using ca.ScottishDwarfStudio.UPooledAudioSystem.Ext;
 using ca.ScottishDwarfStudio.UPooledAudioSystem.Util;
 using UnityEngine;
 
@@ -11,6 +12,7 @@ public sealed class SoundManager:MonoBehaviour
 {
     public static SoundManager Instance => instance;
     static SoundManager instance;
+    static readonly EventHelper eventHelper = new();
     public SoundList Sounds {get => sounds; internal set => sounds = value; }
     internal PoolSystem PoolSystem => poolSystem;
     PoolSystem poolSystem;
@@ -28,6 +30,14 @@ public sealed class SoundManager:MonoBehaviour
     [Header("Sound Data")] object crlf2;
 #pragma warning restore CS0169 // Field is never used
     [SerializeField] SoundList sounds = new();
+
+#if CAN_LINK
+    // Only compile the event system connector if the unity project exists.
+    static SoundManager()
+    {
+        eventHelper.LinkEvents();
+    }
+#endif
 
     void Awake()
     {
