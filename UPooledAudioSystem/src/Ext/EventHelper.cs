@@ -1,6 +1,7 @@
 // Copyright © 2026 ScottishDwarfStudios under licence from mFriesen1024 (mfriesen1024@gmail.com)
 
 using ca.ScottishDwarfStudio.UPooledAudioSystem.Util;
+using UnityEngine;
 using static ca.ScottishDwarfStudio.UPooledAudioSystem.Core.SoundManager;
 
 
@@ -42,17 +43,17 @@ internal class EventHelper
 
     void ButtonPressedNormal()
     {
-        throw new NotImplementedException();
+        Debug.LogException(new NotImplementedException());
     }
 
     void ButtonPressedHeavy()
     {
-        throw new NotImplementedException();
+        Debug.LogException(new NotImplementedException());
     }
 
     void ButtonPressedCharacterSelect()
     {
-        throw new NotImplementedException();
+        Debug.LogException(new NotImplementedException());
     }
 
     void GameplayStart()
@@ -69,32 +70,32 @@ internal class EventHelper
 
     void GameplayPause()
     {
-        throw new NotImplementedException();
+        Debug.LogException(new NotImplementedException());
     }
 
     void GameplayResume()
     {
-        throw new NotImplementedException();
+        Debug.LogException(new NotImplementedException());
     }
 
     void RockHit()
     {
-        throw new NotImplementedException();
+        Instance.PlaySound(sounds.rockHit);
     }
 
     void RockBreak()
     {
-        throw new NotImplementedException();
+        Instance.PlaySound(sounds.rockBreak);
     }
 
     void PlayerMotionUpdate()
     {
-        throw new NotImplementedException();
+        Debug.LogException(new NotImplementedException());
     }
 
     void PlayerHit()
     {
-        throw new NotImplementedException();
+        Instance.PlaySound(sounds.playerHit);
     }
 #endif
 }
