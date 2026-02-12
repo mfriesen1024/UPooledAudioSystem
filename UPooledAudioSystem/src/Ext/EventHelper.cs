@@ -18,20 +18,31 @@ internal class EventHelper
     {
         #if CAN_LINK
         LoadSounds();
-        EventSystem.ButtonPressedNormal += LoadSounds + ButtonPressedNormal;
-        EventSystem.ButtonPressedHeavy += LoadSounds + ButtonPressedHeavy;
-        EventSystem.ButtonPressedCharacterSelect += LoadSounds + ButtonPressedCharacterSelect;
-        
-        EventSystem.GameplayStart += LoadSounds + GameplayStart;
-        EventSystem.GameplayEnd += LoadSounds + GameplayEnd;
-        EventSystem.GameplayPause += LoadSounds + GameplayPause;
-        EventSystem.GameplayResume += LoadSounds + GameplayResume;
-        
-        EventSystem.RockHit += LoadSounds + RockHit;
-        EventSystem.RockBreak += LoadSounds + RockBreak;
-        
-        EventSystem.PlayerMotionUpdate += LoadSounds + PlayerMotionUpdate;
-        EventSystem.PlayerHit += LoadSounds + PlayerHit;
+        EventSystem.ButtonPressedNormal += LoadSounds;
+        EventSystem.ButtonPressedNormal += ButtonPressedNormal;
+        EventSystem.ButtonPressedHeavy += LoadSounds;
+        EventSystem.ButtonPressedHeavy += ButtonPressedHeavy;
+        EventSystem.ButtonPressedCharacterSelect += LoadSounds;
+        EventSystem.ButtonPressedCharacterSelect += ButtonPressedCharacterSelect;
+
+        EventSystem.GameplayStart += LoadSounds;
+        EventSystem.GameplayStart += GameplayStart;
+        EventSystem.GameplayEnd += LoadSounds;
+        EventSystem.GameplayEnd += GameplayEnd;
+        EventSystem.GameplayPause += LoadSounds;
+        EventSystem.GameplayPause += GameplayPause;
+        EventSystem.GameplayResume += LoadSounds;
+        EventSystem.GameplayResume += GameplayResume;
+
+        EventSystem.RockHit += LoadSounds;
+        EventSystem.RockHit += RockHit;
+        EventSystem.RockBreak += LoadSounds;
+        EventSystem.RockBreak += RockBreak;
+
+        EventSystem.PlayerMotionUpdate += LoadSounds;
+        EventSystem.PlayerMotionUpdate += PlayerMotionUpdate;
+        EventSystem.PlayerHit += LoadSounds;
+        EventSystem.PlayerHit += PlayerHit;
         #endif
     }
 
