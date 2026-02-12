@@ -1,5 +1,8 @@
 // Copyright © 2026 ScottishDwarfStudios under licence from mFriesen1024 (mfriesen1024@gmail.com)
 
+using ca.ScottishDwarfStudio.UPooledAudioSystem.Util;
+using static ca.ScottishDwarfStudio.UPooledAudioSystem.Core.SoundManager;
+
 #if CAN_LINK
 
 // Again, this should only compile if we can link to dwarf game.
@@ -7,22 +10,29 @@ namespace ca.ScottishDwarfStudio.UPooledAudioSystem.Ext;
 
 internal class EventHelper
 {
+    SoundList sounds;
+    
     public void LinkEvents()
     {
-        EventSystem.ButtonPressedNormal += ButtonPressedNormal;
-        EventSystem.ButtonPressedHeavy += ButtonPressedHeavy;
-        EventSystem.ButtonPressedCharacterSelect += ButtonPressedCharacterSelect;
+        EventSystem.ButtonPressedNormal += LoadSounds + ButtonPressedNormal;
+        EventSystem.ButtonPressedHeavy += LoadSounds + ButtonPressedHeavy;
+        EventSystem.ButtonPressedCharacterSelect += LoadSounds + ButtonPressedCharacterSelect;
         
-        EventSystem.GameplayStart += GameplayStart;
-        EventSystem.GameplayEnd += GameplayEnd;
-        EventSystem.GameplayPause += GameplayPause;
-        EventSystem.GameplayResume += GameplayResume;
+        EventSystem.GameplayStart += LoadSounds + GameplayStart;
+        EventSystem.GameplayEnd += LoadSounds + GameplayEnd;
+        EventSystem.GameplayPause += LoadSounds + GameplayPause;
+        EventSystem.GameplayResume += LoadSounds + GameplayResume;
         
-        EventSystem.RockHit += RockHit;
-        EventSystem.RockBreak += RockBreak;
+        EventSystem.RockHit += LoadSounds + RockHit;
+        EventSystem.RockBreak += LoadSounds + RockBreak;
         
-        EventSystem.PlayerMotionUpdate += PlayerMotionUpdate;
-        EventSystem.PlayerHit += PlayerHit;
+        EventSystem.PlayerMotionUpdate += LoadSounds + PlayerMotionUpdate;
+        EventSystem.PlayerHit += LoadSounds + PlayerHit;
+    }
+
+    void LoadSounds()
+    {
+        sounds = Instance.Sounds;
     }
 
     void ButtonPressedNormal()
@@ -42,12 +52,14 @@ internal class EventHelper
 
     void GameplayStart()
     {
-        throw new NotImplementedException();
+        Instance.PlaySound(sounds.gameplayStart);
+        Instance.PlaySound(sounds.gameplayMusic);
     }
 
     void GameplayEnd()
     {
-        throw new NotImplementedException();
+        Instance.PlaySound(sounds.gameplayEnd);
+        Instance.PlaySound(sounds.menuMusic);
     }
 
     void GameplayPause()
