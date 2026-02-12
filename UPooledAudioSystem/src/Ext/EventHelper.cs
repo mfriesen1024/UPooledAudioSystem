@@ -3,17 +3,20 @@
 using ca.ScottishDwarfStudio.UPooledAudioSystem.Util;
 using static ca.ScottishDwarfStudio.UPooledAudioSystem.Core.SoundManager;
 
-#if CAN_LINK
 
 // Again, this should only compile if we can link to dwarf game.
 namespace ca.ScottishDwarfStudio.UPooledAudioSystem.Ext;
 
 internal class EventHelper
 {
+    #if CAN_LINK
     SoundList sounds;
+    #endif
     
     public void LinkEvents()
     {
+        #if CAN_LINK
+        LoadSounds();
         EventSystem.ButtonPressedNormal += LoadSounds + ButtonPressedNormal;
         EventSystem.ButtonPressedHeavy += LoadSounds + ButtonPressedHeavy;
         EventSystem.ButtonPressedCharacterSelect += LoadSounds + ButtonPressedCharacterSelect;
@@ -28,8 +31,10 @@ internal class EventHelper
         
         EventSystem.PlayerMotionUpdate += LoadSounds + PlayerMotionUpdate;
         EventSystem.PlayerHit += LoadSounds + PlayerHit;
+        #endif
     }
 
+#if CAN_LINK
     void LoadSounds()
     {
         sounds = Instance.Sounds;
@@ -91,5 +96,5 @@ internal class EventHelper
     {
         throw new NotImplementedException();
     }
-}
 #endif
+}
