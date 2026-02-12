@@ -1,3 +1,5 @@
+// Copyright © 2026 ScottishDwarfStudios under licence from mFriesen1024 (mfriesen1024@gmail.com)
+
 using System;
 using System.IO;
 using System.Net;
