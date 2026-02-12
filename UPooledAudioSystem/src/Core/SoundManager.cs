@@ -55,6 +55,18 @@ public sealed class SoundManager:MonoBehaviour
 
     public void PlaySound(PoolableAudioClip clip)
     {
+        if (clip == null)
+        {
+            Debug.LogError("You tried to play nothing? You're so bad!");
+            return;
+        }
+
+        if (clip.Clip == null)
+        {
+            Debug.LogWarning("The pooled clip has no audio.");
+            return;
+        }
+        
         switch (clip.tag)
         {
             case AudioTags.Tag.Default:
