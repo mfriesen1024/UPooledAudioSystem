@@ -13,6 +13,7 @@ public sealed class SoundManager:MonoBehaviour
     public static SoundManager Instance => instance;
     static SoundManager instance;
     static readonly EventHelper eventHelper = new();
+    static readonly LoadHelper loadHelper = new();
     public SoundList Sounds {get => sounds; internal set => sounds = value; }
     internal PoolSystem PoolSystem => poolSystem;
     PoolSystem poolSystem;
@@ -36,6 +37,7 @@ public sealed class SoundManager:MonoBehaviour
     static SoundManager()
     {
         eventHelper.LinkEvents();
+        loadHelper.TryLoadSounds();
     }
 #endif
 
