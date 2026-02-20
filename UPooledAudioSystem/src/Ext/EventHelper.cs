@@ -43,6 +43,15 @@ internal class EventHelper
         EventSystem.PlayerMotionUpdate += PlayerMotionUpdate;
         EventSystem.PlayerHit += LoadSounds;
         EventSystem.PlayerHit += PlayerHit;
+        EventSystem.PlayerStun += LoadSounds;
+        EventSystem.PlayerStun += PlayerStun;
+        
+        EventSystem.BoxOpened += LoadSounds;
+        EventSystem.BoxOpened += BoxOpened;
+        EventSystem.BoxClosed += LoadSounds;
+        EventSystem.BoxClosed += BoxClosed;
+        EventSystem.BoxOreBanked += LoadSounds;
+        EventSystem.BoxOreBanked += BoxOreBanked;
         #endif
     }
 
@@ -108,6 +117,26 @@ internal class EventHelper
     void PlayerHit()
     {
         Instance.PlaySound(sounds.playerHit);
+    }
+
+    void PlayerStun()
+    {
+        Instance.PlaySound(sounds.playerStun);
+    }
+
+    void BoxOpened()
+    {
+        Instance.PlaySound(sounds.chestOpen);
+    }
+
+    void BoxClosed()
+    {
+        Instance.PlaySound(sounds.chestClose);
+    }
+
+    void BoxOreBanked()
+    {
+        Instance.PlaySound(sounds.chestOreBanked);
     }
 #endif
 }
