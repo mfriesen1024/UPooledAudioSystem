@@ -59,7 +59,7 @@ internal class LoadHelper
     {
         string name = manifestData[index];
         string meta = name + ".meta";
-        string hash = manifestData[index + 1];
+        //string hash = manifestData[index + 1];
 
         if (!File.Exists(PathLib.LocalLoadPath + name)) return;
         File.Delete(targetPath + name);
