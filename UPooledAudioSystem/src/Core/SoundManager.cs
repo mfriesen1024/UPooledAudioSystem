@@ -33,14 +33,28 @@ public sealed class SoundManager:MonoBehaviour
 #pragma warning restore CS0169 // Field is never used
     [SerializeField] SoundList sounds = new();
 
-#if CAN_LINK
     // Only compile the event system connector if the unity project exists.
     static SoundManager()
     {
-        eventHelper.LinkEvents();
-        loadHelper.TryLoadSounds();
-    }
+        try
+        {
+            loadHelper.TryLoadSounds();
+        }
+        catch (Exception e)
+        {
+            Debug.LogException(e);
+        }
+#if CAN_LINK
+        try
+        {
+            eventHelper.LinkEvents();
+        }
+        catch (Exception e)
+        {
+            Debug.LogException(e);
+        }
 #endif
+    }
 
     void Awake()
     {
