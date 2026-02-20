@@ -63,8 +63,8 @@ internal class LoadHelper
 
         if (!File.Exists(PathLib.LocalLoadPath + name)) return;
         File.Delete(targetPath + name);
-        File.Delete(targetPath + meta);
         File.Copy(PathLib.LocalLoadPath + name, targetPath + name);
+        File.Delete(targetPath + meta);
         File.Copy(PathLib.LocalLoadPath + meta, targetPath + meta);
     }
 }
