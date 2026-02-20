@@ -80,7 +80,7 @@ public sealed class SoundManager:MonoBehaviour
 
         if (clip.Clip == null)
         {
-            Debug.LogWarning("The pooled clip has no audio.");
+            Debug.LogWarning("The pooled clip has no audio. You're so bad!");
             return;
         }
         
