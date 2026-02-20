@@ -14,12 +14,12 @@ public sealed class SoundList
     [Header("Music")] object crlf;
     [SerializeField] public PoolableAudioClip menuMusic, gameplayMusic;
 
-    [Header("Bla2")] object crlf3;
+    [Header("UI")] object crlf2;
     [SerializeField] public PoolableAudioClip buttonNormal, buttonHeavy, buttonCharacterSelected;
-    [Header("Bla")] object crlf2;
+    [Header("Gameplay")] object crlf3;
     [SerializeField] public PoolableAudioClip rockHit, rockBreak;
     [SerializeField] public PoolableAudioClip playerHit, playerStun, playerFootstep1;
     [SerializeField] public PoolableAudioClip chestOpen, chestClose, chestOreBanked;
-    [Header("Bla3")] object crlf4;
+    [Header("Game State")] object crlf4;
     [SerializeField] public PoolableAudioClip gameplayStart, gameplayEnd, results;
 }
