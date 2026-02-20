@@ -1,17 +1,11 @@
 // Copyright © 2026 ScottishDwarfStudios under licence from mFriesen1024 (mfriesen1024@gmail.com)
 
-namespace ca.ScottishDwarfStudio.UPooledAudioSystem.Core;
+using ca.ScottishDwarfStudio.UPooledAudioSystem.Util.Strings;
+
+namespace ca.ScottishDwarfStudio.UPooledAudioSystem.Core.Helpers;
 
 internal class LoadHelper
 {
-    const string WebManifestUrl = "https://raw.githubusercontent.com/mfriesen1024/DwarfMusic/refs/heads/DwarfMenu/manifest";
-        
-    const string LocalLoadPath = "../DwarfMusic/Output/";
-    const string LocalManifestPath = "../DwarfMusic/manifest";
-    
-    const string MusDropPath = "./Assets/Sound/Music/";
-    const string SfxDropPath = "./Assets/Sound/SFX/";
-
     const string MenuTheme = "menu";
     const string GameplayTheme = "gameplay";
     readonly string[] musicNames = [MenuTheme, GameplayTheme];
@@ -23,8 +17,8 @@ internal class LoadHelper
     public void TryLoadSounds()
     {
         // Make sure drop paths exist where they should.
-        Directory.CreateDirectory(MusDropPath);
-        Directory.CreateDirectory(SfxDropPath);
+        Directory.CreateDirectory(PathLib.MusDropPath);
+        Directory.CreateDirectory(PathLib.SfxDropPath);
 
         if (!TryLocalLoad()) TryWebLoad();
     }
@@ -34,23 +28,23 @@ internal class LoadHelper
         // I forget if this throws on DirectoryNotFound.
         try
         {
-            if (!File.Exists(LocalLoadPath)) return false;
+            if (!File.Exists(PathLib.LocalLoadPath)) return false;
         }
         catch (Exception ignored)
         {
             return false;
         }
         
-        manifestData = File.ReadAllLines(LocalManifestPath);
+        manifestData = File.ReadAllLines(PathLib.LocalManifestPath);
 
         foreach (var i in musicIndices)
         {
-            LocalGet(i,MusDropPath);
+            LocalGet(i, PathLib.MusDropPath);
         }
 
         foreach (var i in soundIndices)
         {
-            LocalGet(i,SfxDropPath);
+            LocalGet(i, PathLib.SfxDropPath);
         }
         
         return true;
@@ -67,10 +61,10 @@ internal class LoadHelper
         string meta = name + ".meta";
         string hash = manifestData[index + 1];
 
-        if (!File.Exists(LocalLoadPath + name)) return;
+        if (!File.Exists(PathLib.LocalLoadPath + name)) return;
         File.Delete(targetPath + name);
         File.Delete(targetPath + meta);
-        File.Copy(LocalLoadPath + name, targetPath + name);
-        File.Copy(LocalLoadPath + meta, targetPath + meta);
+        File.Copy(PathLib.LocalLoadPath + name, targetPath + name);
+        File.Copy(PathLib.LocalLoadPath + meta, targetPath + meta);
     }
 }
