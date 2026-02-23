@@ -72,7 +72,7 @@ internal class LoadHelper
             int index = musicIndices[i];
             string name = SfxNameLib.MusicNames[i];
             string webName = manifest[index];
-            WebGet(name, webName, tempFile, tempMetaFile);
+            WebGet(name, webName, PathLib.MusDropPath, tempFile, tempMetaFile);
         }
 
         for (int i = 0; i < soundIndices.Length; i++)
@@ -80,14 +80,14 @@ internal class LoadHelper
             int index = soundIndices[i];
             string name = SfxNameLib.SoundNames[i];
             string webName = manifest[index];
-            WebGet(name, webName, tempFile, tempMetaFile);
+            WebGet(name, webName, PathLib.SfxDropPath, tempFile, tempMetaFile);
         }
         
         File.Delete(tempFile);
         File.Delete(tempMetaFile);
     }
 
-    void WebGet(string name, string webName, string tempFile, string tempMetaFile)
+    void WebGet(string name, string webName, string dropPath, string tempFile, string tempMetaFile)
     {
         string extension = Path.GetExtension(webName);
         string location =
@@ -97,7 +97,7 @@ internal class LoadHelper
         try
         {
             webClient.DownloadFile(location, tempFile);
-            string target = PathLib.MusDropPath + name + extension;
+            string target = dropPath + name + extension;
             File.Delete(target);
             File.Move(tempFile, target);
             webClient.DownloadFile(metaLocation, tempMetaFile);
