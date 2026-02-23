@@ -4,7 +4,7 @@ namespace ca.ScottishDwarfStudio.UPooledAudioSystem.Util.Strings;
 
 internal static class PathLib
 {
-    public const string WebManifestUrl = "https://raw.githubusercontent.com/mfriesen1024/DwarfMusic/refs/heads/DwarfMenu/manifest";
+    public const string WebManifestUrl = "https://raw.githubusercontent.com/mfriesen1024/DwarfMusic/refs/heads/stable/manifest";
     public const string LocalLoadPath = "../DwarfMusic/Output/";
     public const string LocalManifestPath = "../DwarfMusic/manifest";
     public const string MusDropPath = "./Assets/Sound/Music/";
