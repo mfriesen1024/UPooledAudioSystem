@@ -10,7 +10,8 @@ internal class LoadHelper
     const string MetaExtension = ".meta";
 
     readonly int[] musicIndices = [4, 7];
-    readonly int[] soundIndices = [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1];
+    // TODO: yeah i should just calculate these from offset instead of hardcoding...
+    readonly int[] soundIndices = [13, 16, 19, 22, 25, 28, 31, 34, 37, 40, 43, 46 ,49];
 
     WebClient webClient = null!;
     string[] manifestData = null!;
