@@ -20,7 +20,8 @@ public class SoundLoader : MonoBehaviour
     const string DepDirName = "UPooledAudioSystem/UPooledAudioSystem/bin/Debug/netstandard2.1/";
     const string MainDepPath = "../"+DepDirName;
     const string AltDepPath = "../../../RiderProjects/"+DepDirName;
-    const string TempVersionPath = "./obj/Debug/soundVersion";
+    const string TempVersionPath = "./obj/Debug/";
+    const string TempVersionFile = TempVersionPath + "soundVersion";
 
     const string TargetDirName = "./Assets/ExternalAssemblies/";
     
@@ -38,7 +39,7 @@ public class SoundLoader : MonoBehaviour
         
         if (!Directory.Exists(TargetDirName)) { Directory.CreateDirectory(TargetDirName);}
         if(File.Exists(TargetDirName+SymbolsName)) File.Delete(TargetDirName+SymbolsName);
-        File.Delete(TargetDirName+DepName);
+        if(foundPath!=2) File.Delete(TargetDirName+DepName);
 
         // bla
         switch (foundPath)
@@ -61,13 +62,14 @@ public class SoundLoader : MonoBehaviour
                 using (var client = new WebClient())
                 {
                     string oldVersion = $"v{float.NaN}";
-                    if(File.Exists(TempVersionPath)) oldVersion = File.ReadAllText(TempVersionPath);
-                    client.DownloadFile(VersionUrl, TempVersionPath);
-                    string version = File.ReadAllText(TempVersionPath);
+                    Directory.CreateDirectory(TempVersionPath);
+                    if(File.Exists(TempVersionFile)) oldVersion = File.ReadAllText(TempVersionFile);
+                    client.DownloadFile(VersionUrl, TempVersionFile);
+                    string version = File.ReadAllText(TempVersionFile);
 
-                    if (oldVersion == version)
+                    if (oldVersion == version && File.Exists(TargetDirName+DepName))
                     {
-                        Debug.Log($"Successfully verified sound system. Running version {version}");
+                        // Debug.Log($"Successfully verified sound system. Running version {version}");
                         return;
                     }
                     
@@ -77,7 +79,7 @@ public class SoundLoader : MonoBehaviour
                     client.DownloadFile(releaseURL + DepName, TargetDirName+DepName);
                     client.DownloadFile(releaseURL + MetaName, TargetDirName+MetaName);
 
-                    Debug.Log($"Successfully updated sound system to {version}.");
+                    // Debug.Log($"Successfully updated sound system to {version}.");
                 }
 
                 if (restartOnWebUpdate) new GameObject().AddComponent(typeof(UnityRestarter));
