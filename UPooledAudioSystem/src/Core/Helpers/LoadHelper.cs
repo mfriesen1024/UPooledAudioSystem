@@ -2,6 +2,7 @@
 
 using System.Net;
 using ca.ScottishDwarfStudio.UPooledAudioSystem.Util.Strings;
+using UnityEngine;
 
 namespace ca.ScottishDwarfStudio.UPooledAudioSystem.Core.Helpers;
 
@@ -93,14 +94,21 @@ internal class LoadHelper
             $"https://github.com/mfriesen1024/DwarfMusic/releases/download/{version}/{webName}";
         string metaLocation = location + MetaExtension;
 
-        webClient.DownloadFile(location, tempFile);
-        string target = PathLib.MusDropPath + name + extension;
-        File.Delete(target);
-        File.Move(tempFile, target);
-        webClient.DownloadFile(metaLocation, tempMetaFile);
-        target += MetaExtension;
-        File.Delete(target);
-        File.Move(tempMetaFile, target);
+        try
+        {
+            webClient.DownloadFile(location, tempFile);
+            string target = PathLib.MusDropPath + name + extension;
+            File.Delete(target);
+            File.Move(tempFile, target);
+            webClient.DownloadFile(metaLocation, tempMetaFile);
+            target += MetaExtension;
+            File.Delete(target);
+            File.Move(tempMetaFile, target);
+        }
+        catch (Exception e)
+        {
+            Debug.LogWarning($"Exception {e.GetType()}: {e.Message} while loading {name}. {Environment.NewLine} {e.StackTrace}");
+        }
     }
 
     void LocalGet(int index, string targetPath)
