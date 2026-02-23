@@ -100,7 +100,7 @@ internal class LoadHelper
         webClient.DownloadFile(metaLocation, tempMetaFile);
         target += MetaExtension;
         File.Delete(target);
-        File.Move(tempFile, target);
+        File.Move(tempMetaFile, target);
     }
 
     void LocalGet(int index, string targetPath)
