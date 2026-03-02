@@ -1,5 +1,6 @@
 // Copyright © 2026 ScottishDwarfStudios under licence from mFriesen1024 (mfriesen1024@gmail.com)
 
+using System;
 using ca.ScottishDwarfStudio.UPooledAudioSystem.Core;
 using UnityEngine;
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
