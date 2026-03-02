@@ -29,4 +29,12 @@
     <PropertyGroup Condition="Exists('..\..\..\Documents\GitHub\DwarfGame\Library\ScriptAssemblies\Assembly-CSharp.dll')">
         <DefineConstants>$(DefineConstants);CAN_LINK</DefineConstants>
     </PropertyGroup>
+    <ItemGroup Condition="Exists('..\..\..\..\Library\ScriptAssemblies\Assembly-CSharp.dll')">
+        <Reference Include="Assembly-CSharp">
+            <HintPath>..\..\..\..\Library\ScriptAssemblies\Assembly-CSharp.dll</HintPath>
+        </Reference>
+    </ItemGroup>
+    <PropertyGroup Condition="Exists('..\..\..\..\\Library\ScriptAssemblies\Assembly-CSharp.dll')">
+        <DefineConstants>$(DefineConstants);CAN_LINK</DefineConstants>
+    </PropertyGroup>
 </Project>
