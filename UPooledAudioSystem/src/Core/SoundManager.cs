@@ -7,43 +7,43 @@ using UnityEngine;
 
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
 
-namespace ca.ScottishDwarfStudio.UPooledAudioSystem.Core;
-
-public sealed class SoundManager:MonoBehaviour
+namespace ca.ScottishDwarfStudio.UPooledAudioSystem.Core
 {
-    public static SoundManager Instance => instance;
-    static SoundManager instance;
-    static readonly EventHelper eventHelper = new();
-    //static readonly LoadHelper loadHelper = new();
-    public SoundList Sounds {get => sounds; internal set => sounds = value; }
-    internal PoolSystem PoolSystem => poolSystem;
-    PoolSystem poolSystem;
-    
-    AudioSource musicSource;
-    AudioSource staticFxSource;
-
-#pragma warning disable CS0169 // Field is never used
-    [Header("Performance")] object crlf;
-#pragma warning restore CS0169 // Field is never used
-    [SerializeField] int poolSize = 10;
-    [SerializeField] bool deleteUnusedOverflow=true; 
-
-#pragma warning disable CS0169 // Field is never used
-    [Header("Sound Data")] object crlf2;
-#pragma warning restore CS0169 // Field is never used
-    [SerializeField] SoundList sounds = new();
-
-    // Only compile the event system connector if the unity project exists.
-    static SoundManager()
+    public sealed class SoundManager:MonoBehaviour
     {
-        try
+        public static SoundManager Instance => instance;
+        static SoundManager instance;
+        static readonly EventHelper eventHelper = new();
+        //static readonly LoadHelper loadHelper = new();
+        public SoundList Sounds {get => sounds; internal set => sounds = value; }
+        internal PoolSystem PoolSystem => poolSystem;
+        PoolSystem poolSystem;
+    
+        AudioSource musicSource;
+        AudioSource staticFxSource;
+
+#pragma warning disable CS0169 // Field is never used
+        [Header("Performance")] object crlf;
+#pragma warning restore CS0169 // Field is never used
+        [SerializeField] int poolSize = 10;
+        [SerializeField] bool deleteUnusedOverflow=true; 
+
+#pragma warning disable CS0169 // Field is never used
+        [Header("Sound Data")] object crlf2;
+#pragma warning restore CS0169 // Field is never used
+        [SerializeField] SoundList sounds = new();
+
+        // Only compile the event system connector if the unity project exists.
+        static SoundManager()
         {
-            //loadHelper.TryLoadSounds();
-        }
-        catch (Exception e)
-        {
-            Debug.LogException(e);
-        }
+            try
+            {
+                //loadHelper.TryLoadSounds();
+            }
+            catch (Exception e)
+            {
+                Debug.LogException(e);
+            }
 #if CAN_LINK
         try
         {
@@ -54,51 +54,52 @@ public sealed class SoundManager:MonoBehaviour
             Debug.LogException(e);
         }
 #endif
-    }
-
-    void Awake()
-    {
-        instance = this;
-        
-        musicSource = (new GameObject("MusicSource").AddComponent(typeof(AudioSource)) as AudioSource)!;
-        staticFxSource = (new GameObject("StaticFXSource").AddComponent(typeof(AudioSource)) as AudioSource)!;
-        musicSource.transform.SetParent(transform);
-        staticFxSource.transform.SetParent(transform);
-
-        poolSystem = (new GameObject("PooledSources").AddComponent(typeof(PoolSystem)) as PoolSystem)!;
-        poolSystem.transform.SetParent(transform);
-        poolSystem.Init(poolSize, deleteUnusedOverflow);
-    }
-
-    public void PlaySound(PoolableAudioClip clip)
-    {
-        if (clip == null)
-        {
-            Debug.LogError("You tried to play nothing? You're so bad!");
-            return;
         }
 
-        if (clip.Clip == null)
+        void Awake()
         {
-            Debug.LogWarning("The pooled clip has no audio. You're so bad!");
-            return;
-        }
+            instance = this;
         
-        switch (clip.tag)
+            musicSource = (new GameObject("MusicSource").AddComponent(typeof(AudioSource)) as AudioSource)!;
+            staticFxSource = (new GameObject("StaticFXSource").AddComponent(typeof(AudioSource)) as AudioSource)!;
+            musicSource.transform.SetParent(transform);
+            staticFxSource.transform.SetParent(transform);
+
+            poolSystem = (new GameObject("PooledSources").AddComponent(typeof(PoolSystem)) as PoolSystem)!;
+            poolSystem.transform.SetParent(transform);
+            poolSystem.Init(poolSize, deleteUnusedOverflow);
+        }
+
+        public void PlaySound(PoolableAudioClip clip)
         {
-            case AudioTags.Tag.Default:
-                poolSystem.PlaySound(clip);
-                break;
-            case AudioTags.Tag.BGM:
-                musicSource.clip = clip;
-                musicSource.Play();
-                break;
-            case AudioTags.Tag.Static:
-                staticFxSource.clip = clip;
-                staticFxSource.Play();
-                break;
-            default:
-                throw new ArgumentOutOfRangeException();
+            if (clip == null)
+            {
+                Debug.LogError("You tried to play nothing? You're so bad!");
+                return;
+            }
+
+            if (clip.Clip == null)
+            {
+                Debug.LogWarning("The pooled clip has no audio. You're so bad!");
+                return;
+            }
+        
+            switch (clip.tag)
+            {
+                case AudioTags.Tag.Default:
+                    poolSystem.PlaySound(clip);
+                    break;
+                case AudioTags.Tag.BGM:
+                    musicSource.clip = clip;
+                    musicSource.Play();
+                    break;
+                case AudioTags.Tag.Static:
+                    staticFxSource.clip = clip;
+                    staticFxSource.Play();
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
     }
 }

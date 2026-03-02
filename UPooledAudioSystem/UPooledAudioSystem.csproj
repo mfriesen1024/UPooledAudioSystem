@@ -8,7 +8,19 @@
         <RootNamespace>ca.ScottishDwarfStudio.UPooledAudioSystem</RootNamespace>
     </PropertyGroup>
 
-    <ItemGroup>      
+    <ItemGroup Condition="Exists('..\..\..\..\..\..\..\..\Unity\Hub\Editor\6000.0.58f2\Editor\Data\Managed\UnityEngine\UnityEngine.dll')">
+        <Reference Include="UnityEngine">
+            <HintPath>..\..\..\..\..\..\..\..\Unity\Hub\Editor\6000.0.58f2\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.AudioModule">
+            <HintPath>..\..\..\..\..\..\..\..\Unity\Hub\Editor\6000.0.58f2\Editor\Data\Managed\UnityEngine\UnityEngine.AudioModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.CoreModule">
+            <HintPath>..\..\..\..\..\..\..\..\Unity\Hub\Editor\6000.0.58f2\Editor\Data\Managed\UnityEngine\UnityEngine.CoreModule.dll</HintPath>
+        </Reference>  
+    </ItemGroup>
+
+    <ItemGroup Condition="Exists('..\..\..\Unity\Hub\Editor\6000.0.58f2\Editor\Data\Managed\UnityEngine\UnityEngine.dll')">    
       <Reference Include="UnityEngine">
         <HintPath>..\..\..\Unity\Hub\Editor\6000.0.58f2\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
       </Reference>

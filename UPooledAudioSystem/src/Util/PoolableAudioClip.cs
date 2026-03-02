@@ -2,17 +2,18 @@
 
 using UnityEngine;
 
-namespace ca.ScottishDwarfStudio.UPooledAudioSystem.Util;
-
-[Serializable]
-public sealed class PoolableAudioClip
+namespace ca.ScottishDwarfStudio.UPooledAudioSystem.Util
 {
-    [SerializeField] internal AudioClip Clip = null!;
-    [Tooltip("This isn't implemented yet.")] // TODO: implement individual sound volume modifiers.
-    public float VolumeMultiplier = 1;
-    public AudioTags.Tag tag = AudioTags.Tag.Default;
+    [Serializable]
+    public sealed class PoolableAudioClip
+    {
+        [SerializeField] internal AudioClip Clip = null!;
+        [Tooltip("This isn't implemented yet.")] // TODO: implement individual sound volume modifiers.
+        public float VolumeMultiplier = 1;
+        public AudioTags.Tag tag = AudioTags.Tag.Default;
     
-    internal string StringTag => AudioTags.TagToString(tag);
+        internal string StringTag => AudioTags.TagToString(tag);
     
-    public static implicit operator AudioClip(PoolableAudioClip clip) => clip.Clip;
+        public static implicit operator AudioClip(PoolableAudioClip clip) => clip.Clip;
+    }
 }
