@@ -1,6 +1,6 @@
 // Copyright © 2026 ScottishDwarfStudios under licence from mFriesen1024 (mfriesen1024@gmail.com)
 
-using ca.ScottishDwarfStudio.UPooledAudioSystem.Core.Helpers;
+//using ca.ScottishDwarfStudio.UPooledAudioSystem.Core.Helpers;
 using ca.ScottishDwarfStudio.UPooledAudioSystem.Ext;
 using ca.ScottishDwarfStudio.UPooledAudioSystem.Util;
 using UnityEngine;
@@ -14,7 +14,7 @@ public sealed class SoundManager:MonoBehaviour
     public static SoundManager Instance => instance;
     static SoundManager instance;
     static readonly EventHelper eventHelper = new();
-    static readonly LoadHelper loadHelper = new();
+    //static readonly LoadHelper loadHelper = new();
     public SoundList Sounds {get => sounds; internal set => sounds = value; }
     internal PoolSystem PoolSystem => poolSystem;
     PoolSystem poolSystem;
@@ -38,7 +38,7 @@ public sealed class SoundManager:MonoBehaviour
     {
         try
         {
-            loadHelper.TryLoadSounds();
+            //loadHelper.TryLoadSounds();
         }
         catch (Exception e)
         {
