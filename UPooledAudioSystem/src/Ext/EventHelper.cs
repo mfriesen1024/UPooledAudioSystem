@@ -1,5 +1,6 @@
 // Copyright © 2026 ScottishDwarfStudios under licence from mFriesen1024 (mfriesen1024@gmail.com)
 
+using System;
 using ca.ScottishDwarfStudio.UPooledAudioSystem.Util;
 using UnityEngine;
 using static ca.ScottishDwarfStudio.UPooledAudioSystem.Core.SoundManager;
@@ -10,13 +11,10 @@ namespace ca.ScottishDwarfStudio.UPooledAudioSystem.Ext
 {
     internal class EventHelper
     {
-#if CAN_LINK
     SoundList sounds;
-#endif
     
         public void LinkEvents()
         {
-#if CAN_LINK
         LoadSounds();
         EventSystem.ButtonPressedNormal += LoadSounds;
         EventSystem.ButtonPressedNormal += ButtonPressedNormal;
@@ -52,10 +50,7 @@ namespace ca.ScottishDwarfStudio.UPooledAudioSystem.Ext
         EventSystem.BoxClosed += BoxClosed;
         EventSystem.BoxOreBanked += LoadSounds;
         EventSystem.BoxOreBanked += BoxOreBanked;
-#endif
         }
-
-#if CAN_LINK
     void LoadSounds()
     {
         sounds = Instance?.Sounds;
@@ -138,6 +133,5 @@ namespace ca.ScottishDwarfStudio.UPooledAudioSystem.Ext
     {
         Instance.PlaySound(sounds.chestOreBanked);
     }
-#endif
     }
 }
